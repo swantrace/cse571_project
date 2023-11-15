@@ -40,7 +40,6 @@ class Data_Loaders:
 
 
 # STUDENTS: randomly split dataset into two data.DataLoaders, self.train_loader and self.test_loader
-# make sure your split can handle an arbitrary number of samples in the dataset as this may vary
 
 
 def main():
