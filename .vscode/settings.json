@@ -3,5 +3,10 @@
   "editor.formatOnSave": true,
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter"
-  }
+  },
+  "pylint.interpreter": [
+    "/home/fred/.cache/pypoetry/virtualenvs/collision-predicition-EXoKqm4X-py3.10/bin/python"
+  ],
+  "python.analysis.enablePytestExtra": false,
+  "python.defaultInterpreterPath": "/home/fred/.cache/pypoetry/virtualenvs/collision-predicition-EXoKqm4X-py3.10/bin/python"
 }
