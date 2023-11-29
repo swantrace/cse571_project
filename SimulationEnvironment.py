@@ -451,3 +451,7 @@ class SimulationEnvironment:
 
     def ovector(self, angle):
         return math.cos(angle), math.sin(angle)
+    
+    def close(self):
+        pg.display.quit()
+        pg.quit()
