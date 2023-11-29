@@ -1,5 +1,4 @@
 # ************** STUDENTS EDIT THIS FILE **************
-
 from SteeringBehaviors import Wander
 import SimulationEnvironment as sim
 
@@ -16,7 +15,7 @@ def collect_training_data(total_actions):
     num_params = 7
     #STUDENTS: network_params will be used to store your training data
     # a single sample will be comprised of: sensor_readings, action, collision
-    network_params =
+    network_params = np.zeros((total_actions, num_params))
 
 
     for action_i in range(total_actions):
@@ -36,21 +35,32 @@ def collect_training_data(total_actions):
                 steering_behavior.reset_action()
                 #STUDENTS NOTE: this statement only EDITS collision of PREVIOUS action
                 #if current action is very new.
-                if action_timestep < action_repeat * .3: #in case prior action caused collision
-                    network_params[-1][-1] = collision #share collision result with prior action
+                if action_timestep < action_repeat * .3 and action_timestep > 1: #in case prior action caused collision
+                    network_params[action_timestep-1][-1] = collision #share collision result with prior action
                 break
 
 
         #STUDENTS: Update network_params.
-
+        network_params[action_i][0:5] = sensor_readings
+        network_params[action_i][5] = action
+        network_params[action_i][6] = collision
 
     #STUDENTS: Save .csv here. Remember rows are individual samples, the first 5
     #columns are sensor values, the 6th is the action, and the 7th is collision.
     #Do not title the columns. Your .csv should look like the provided sample.
+    #first five columns are float values, last two are integer
+    data = np.array(network_params)
+    formatted_data = np.vectorize(custom_format)(data)
+    np.savetxt('submission.csv', formatted_data, fmt="%s", delimiter=',')
+    # close environment
+    sim_env.close()
 
 
-
-
+def custom_format(x):
+    if x == int(x):
+        return f"{int(x)}"
+    else:
+        return f"{x:.12f}"
 
 
 
