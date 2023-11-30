@@ -69,5 +69,5 @@ def custom_format(x):
 
 
 if __name__ == "__main__":
-    total_actions = 1000
+    total_actions = 20000
     collect_training_data(total_actions)

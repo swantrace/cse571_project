@@ -34,7 +34,7 @@ class Action_Conditioned_FF(nn.Module):
         for idx, sample in enumerate(test_loader):
             input, label = sample["input"], sample["label"]
             output = model(input)
-            loss += loss_function(output, label)
+            loss += loss_function(output, label.unsqueeze(1)).item()
         return loss / len(test_loader)
 
 
